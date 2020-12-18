@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SensorApp</string>
+    <string name="accelerometer_title">Accelerometer</string>
+
+    <string name="accelerometer_x_value">X : %1$.2f</string>
+    <string name="accelerometer_y_value">Y : %1$.2f</string>
+    <string name="accelerometer_z_value">Z : %1$.2f</string>
+
+    <string name="magnetometer_x_value">X : %1$.2f</string>
+    <string name="magnetometer_y_value">Y : %1$.2f</string>
+    <string name="magnetometer_z_value">Z : %1$.2f</string>
+
+</resources>
