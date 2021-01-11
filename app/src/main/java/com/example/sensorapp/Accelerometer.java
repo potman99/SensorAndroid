@@ -18,7 +18,7 @@ public class Accelerometer extends AppCompatActivity implements SensorEventListe
     private TextView yValue;
     private TextView zValue;
 
-    public void setData(float[] data) {
+    private void setData(float[] data) {
         xValue.setText(getResources().getString(R.string.accelerometer_x_value, data[0]));
         yValue.setText(getResources().getString(R.string.accelerometer_y_value, data[1]));
         zValue.setText(getResources().getString(R.string.accelerometer_z_value, data[2]));

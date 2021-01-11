@@ -1,6 +1,7 @@
 package com.example.sensorapp;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class SensorData implements Serializable {
     private float[] accelerometer;
@@ -22,8 +23,16 @@ public class SensorData implements Serializable {
         this.magnetometer = magnetometer;
     }
 
-    public SensorData(){
+    public SensorData() {
         this.accelerometer = new float[3];
         this.magnetometer = new float[3];
+    }
+
+    @Override
+    public String toString() {
+        return "SensorData{" +
+                "accelerometer=" + Arrays.toString(accelerometer) +
+                ", magnetometer=" + Arrays.toString(magnetometer) +
+                '}';
     }
 }

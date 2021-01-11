@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-
 public class Magnetometer extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
@@ -22,7 +20,7 @@ public class Magnetometer extends AppCompatActivity implements SensorEventListen
     private TextView yValue;
     private TextView zValue;
 
-    public void setData(float[] data){
+    private void setData(float[] data){
         xValue.setText(getResources().getString(R.string.magnetometer_x_value, data[0]));
         yValue.setText(getResources().getString(R.string.magnetometer_y_value, data[1]));
         zValue.setText(getResources().getString(R.string.magnetometer_z_value, data[2]));
@@ -34,6 +32,7 @@ public class Magnetometer extends AppCompatActivity implements SensorEventListen
             Properties.sensorData.setMagnetometer(sensorEvent.values);
         }
         if(Properties.getIsDataSource()) {
+            Log.v("Magnet", Properties.sensorData.toString());
             setData(Properties.sensorData.getMagnetometer());
         } else {
             setData(sensorEvent.values);
@@ -64,7 +63,6 @@ public class Magnetometer extends AppCompatActivity implements SensorEventListen
     protected void onStart() {
         super.onStart();
         if(magnetometer != null) {
-
             sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
@@ -73,6 +71,5 @@ public class Magnetometer extends AppCompatActivity implements SensorEventListen
     protected void onStop() {
         super.onStop();
         sensorManager.unregisterListener(this);
-
     }
 }
