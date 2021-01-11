@@ -74,7 +74,7 @@ public class DataReceive {
                     iStream = new ObjectInputStream(new ByteArrayInputStream(packet.getData()));
                     SensorData sensorData = (SensorData) iStream.readObject();
                     iStream.close();
-                    Properties.setSensorData(sensorData);
+                    Properties.setSensorDataLocal(sensorData);
                     Log.v(TAG, "Server: Received sensor data from " + packet.getAddress() + ":" + packet.getPort() + "[" + LocalDateTime.now() + "]");
                 } catch (IOException | ClassNotFoundException e) {
                     Log.d(TAG, "Error: " + e.getLocalizedMessage());

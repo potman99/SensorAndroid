@@ -27,10 +27,10 @@ public class Accelerometer extends AppCompatActivity implements SensorEventListe
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (Properties.getIsBroadcast()) {
-            Properties.sensorData.setAccelerometer(sensorEvent.values);
+            Properties.sensorDataBroadcast.setAccelerometer(sensorEvent.values);
         }
         if (Properties.getIsDataSource()) {
-            setData(Properties.sensorData.getAccelerometer());
+            setData(Properties.sensorDataLocal.getAccelerometer());
         } else {
             setData(sensorEvent.values);
         }

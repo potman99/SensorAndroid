@@ -29,11 +29,10 @@ public class Magnetometer extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(Properties.getIsBroadcast()) {
-            Properties.sensorData.setMagnetometer(sensorEvent.values);
+            Properties.sensorDataBroadcast.setMagnetometer(sensorEvent.values);
         }
         if(Properties.getIsDataSource()) {
-            Log.v("Magnet", Properties.sensorData.toString());
-            setData(Properties.sensorData.getMagnetometer());
+            setData(Properties.sensorDataLocal.getMagnetometer());
         } else {
             setData(sensorEvent.values);
         }

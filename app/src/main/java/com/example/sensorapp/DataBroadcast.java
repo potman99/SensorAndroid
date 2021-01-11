@@ -36,9 +36,9 @@ public class DataBroadcast {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void run() {
-                client.sendObject(Properties.sensorData);
+                client.sendObject(Properties.sensorDataBroadcast);
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
     public void stop() {
