@@ -11,29 +11,33 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Accelerometer extends AppCompatActivity implements SensorEventListener{
-
+public class Accelerometer extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private TextView xValue;
     private TextView yValue;
     private TextView zValue;
 
+    public void setData(float[] data) {
+        xValue.setText(getResources().getString(R.string.accelerometer_x_value, data[0]));
+        yValue.setText(getResources().getString(R.string.accelerometer_y_value, data[1]));
+        zValue.setText(getResources().getString(R.string.accelerometer_z_value, data[2]));
+    }
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-
-        float current_xValue = sensorEvent.values[0];
-        float current_yValue = sensorEvent.values[1];
-        float current_zValue = sensorEvent.values[2];
-
-        xValue.setText(getResources().getString(R.string.accelerometer_x_value, current_xValue));
-        yValue.setText(getResources().getString(R.string.accelerometer_y_value, current_yValue));
-        zValue.setText(getResources().getString(R.string.accelerometer_z_value, current_zValue));
+        if (Properties.getIsBroadcast()) {
+            Properties.sensorData.setAccelerometer(sensorEvent.values);
+        }
+        if (Properties.getIsDataSource()) {
+            setData(Properties.sensorData.getAccelerometer());
+        } else {
+            setData(sensorEvent.values);
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @Override
@@ -47,16 +51,15 @@ public class Accelerometer extends AppCompatActivity implements SensorEventListe
         zValue = findViewById(R.id.zValue);
 
         //define instances
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(accelerometer != null) {
-
-            sensorManager.registerListener(this, accelerometer, sensorManager.SENSOR_DELAY_NORMAL);
+        if (accelerometer != null) {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
